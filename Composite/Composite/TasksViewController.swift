@@ -11,7 +11,41 @@ class TasksViewController: UITableViewController {
     
     var tasks = [ConcreteTask]()
 
-    @IBAction func addTask(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addTapped))
+
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell") as? TaskCell else { return UITableViewCell() }
+        
+        cell.taskName.text = tasks[indexPath.row].text
+        cell.subTasksCount.text = "Кол-во подзадач: \(0)"
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.tasks.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+    }
+    
+    @objc private func addTapped() {
         let alertVC = UIAlertController(title: "Добавить задачу", message: "", preferredStyle: .alert)
         alertVC.addTextField { textField in
             textField.placeholder = "Введите имя задачи"
@@ -23,20 +57,5 @@ class TasksViewController: UITableViewController {
         }
         alertVC.addAction(action)
         self.present(alertVC, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
     }
 }

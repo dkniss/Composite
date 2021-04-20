@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VUs-WE-5Ic">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,6 +43,7 @@
                                         <constraint firstItem="LPu-Dm-Zxn" firstAttribute="leading" secondItem="Grb-7m-uc1" secondAttribute="leading" constant="20" symbolic="YES" id="dhS-d5-dIx"/>
                                         <constraint firstItem="em5-ld-NzY" firstAttribute="leading" secondItem="Grb-7m-uc1" secondAttribute="leading" constant="20" symbolic="YES" id="kpw-45-a98"/>
                                         <constraint firstItem="em5-ld-NzY" firstAttribute="top" secondItem="Grb-7m-uc1" secondAttribute="top" constant="20" id="otm-Oe-IQO"/>
+                                        <constraint firstAttribute="bottom" secondItem="LPu-Dm-Zxn" secondAttribute="bottom" constant="10.5" id="rcv-rl-opK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -57,20 +57,7 @@
                             <outlet property="delegate" destination="fds-Po-UJd" id="KqZ-9F-SyS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Composite" id="D5S-OQ-XAK">
-                        <barButtonItem key="rightBarButtonItem" title="AddTask" style="plain" id="a7l-Oc-k0P">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ES9-7I-8eg">
-                                <rect key="frame" x="372.5" y="11" width="21.5" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
-                                </state>
-                            </button>
-                            <connections>
-                                <action selector="addTask:" destination="fds-Po-UJd" id="kjU-2E-HE1"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Composite" id="D5S-OQ-XAK"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pNa-Ef-qrE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,7 +83,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

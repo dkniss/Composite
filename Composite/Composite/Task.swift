@@ -9,22 +9,23 @@ import Foundation
 
 protocol Task {
     var text: String { get }
+    
 }
 
-class ConcreteTask: Task {
-    var text: String
-
-    init(_ text: String) {
-        self.text = text
-    }
-}
+//class ConcreteTask: Task {
+//    var text: String
+//
+//    init(_ text: String) {
+//        self.text = text
+//    }
+//}
 
 class CompositeTask: Task {
     var text: String
     
-    var tasks: [ConcreteTask]
+    var tasks: [CompositeTask]
     
-    init(_ text: String,_ tasks: [ConcreteTask]) {
+    init(_ text: String,_ tasks: [CompositeTask]) {
         self.text = text
         self.tasks = tasks
     }

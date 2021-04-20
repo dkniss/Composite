@@ -7,15 +7,17 @@
 
 import UIKit
 
-class TasksViewController: UITableViewController {
+class TasksViewController: UITableViewController,UINavigationControllerDelegate {
     
     var tasks = [CompositeTask]()
+    
+    var previousTaskIndexPath: IndexPath?
+    
+    weak var delegate: TasksDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addTapped))
-        self.navigationController?.delegate = self
 
     }
 
@@ -34,7 +36,8 @@ class TasksViewController: UITableViewController {
         let currentTask = tasks[indexPath.row]
         
         nextViewController.tasks = currentTask.tasks
-        
+        nextViewController.delegate = self
+        self.previousTaskIndexPath = indexPath
         navigationController?.pushViewController(nextViewController, animated: true)
         
     }
@@ -52,7 +55,10 @@ class TasksViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            self.tasks.remove(at: indexPath.row)
+            self.delegate?.updateTasks(with: self.tasks)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.reloadData()
         }
     }
     
@@ -65,6 +71,7 @@ class TasksViewController: UITableViewController {
         let action = UIAlertAction(title: "Ок", style: .default) { _ in
             let newTask = CompositeTask(alertVC.textFields![0].text ?? "", [])
             self.tasks.append(newTask)
+            self.delegate?.updateTasks(with: self.tasks)
             self.tableView.reloadData()
         }
         
@@ -73,7 +80,17 @@ class TasksViewController: UITableViewController {
     }
 }
 
-extension TasksViewController: UINavigationControllerDelegate {
-    
+protocol TasksDelegate: AnyObject {
+    func updateTasks(with tasks : [CompositeTask])
 }
 
+extension TasksViewController: TasksDelegate {
+    func updateTasks(with tasks: [CompositeTask]) {
+        if let previousIndexPath = self.previousTaskIndexPath {
+            self.tasks[previousIndexPath.row].tasks = tasks
+            self.tableView.reloadRows(at: [previousIndexPath], with: .automatic)
+        }
+    }
+    
+    
+}

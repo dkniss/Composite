@@ -18,7 +18,6 @@ class TasksViewController: UITableViewController,UINavigationControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addTapped))
-
     }
 
     // MARK: - Table view data source

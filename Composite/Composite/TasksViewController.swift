@@ -57,7 +57,6 @@ class TasksViewController: UITableViewController,UINavigationControllerDelegate 
             self.tasks.remove(at: indexPath.row)
             self.delegate?.updateTasks(with: self.tasks)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
-            self.tableView.reloadData()
         }
     }
     

@@ -9,16 +9,7 @@ import Foundation
 
 protocol Task {
     var text: String { get }
-    
 }
-
-//class ConcreteTask: Task {
-//    var text: String
-//
-//    init(_ text: String) {
-//        self.text = text
-//    }
-//}
 
 class CompositeTask: Task {
     var text: String

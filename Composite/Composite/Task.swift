@@ -7,13 +7,8 @@
 
 import Foundation
 
-protocol Task {
-    var text: String { get }
-}
-
-class CompositeTask: Task {
+class CompositeTask {
     var text: String
-    
     var tasks: [CompositeTask]
     
     init(_ text: String,_ tasks: [CompositeTask]) {

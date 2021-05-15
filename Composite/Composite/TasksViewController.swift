@@ -10,9 +10,7 @@ import UIKit
 class TasksViewController: UITableViewController,UINavigationControllerDelegate {
     
     var tasks = [CompositeTask]()
-    
     var previousTaskIndexPath: IndexPath?
-    
     weak var delegate: TasksDelegate?
 
     override func viewDidLoad() {
@@ -32,6 +30,7 @@ class TasksViewController: UITableViewController,UINavigationControllerDelegate 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextViewController = storyboard?.instantiateViewController(identifier: "TasksViewController") as? TasksViewController else { return }
+        
         let currentTask = tasks[indexPath.row]
         
         nextViewController.tasks = currentTask.tasks
@@ -42,7 +41,8 @@ class TasksViewController: UITableViewController,UINavigationControllerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell") as? TaskCell else { return UITableViewCell() }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell") as? TaskCell else { return UITableViewCell() }
         
         let currentTask = self.tasks[indexPath.row]
         
